@@ -1,14 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4w8xnl70jnto"]
+[gd_scene load_steps=5 format=3 uid="uid://b4w8xnl70jnto"]
 
 [ext_resource type="Script" uid="uid://brv7iqs2oppf" path="res://scenes/main_game.gd" id="1_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://bhhbq5qegh5jo" path="res://scenes/player.tscn" id="1_uwrxv"]
-[ext_resource type="PackedScene" uid="uid://cp7ylvbnc5wos" path="res://scenes/mac_pipes.tscn" id="2_iywne"]
 [ext_resource type="Texture2D" uid="uid://c7pauged3jr0m" path="res://assets/sprites/bg.png" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://b7x43y2m85gsj" path="res://scenes/windows_ground.tscn" id="4_lbhrr"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_lnu2h")
-pipe_scene = ExtResource("2_iywne")
 
 [node name="bg" type="Sprite2D" parent="."]
 position = Vector2(-432, -364)
@@ -21,8 +19,3 @@ position = Vector2(113, 403)
 
 [node name="windows_ground" parent="." instance=ExtResource("4_lbhrr")]
 position = Vector2(0, -85)
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 1.5
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
