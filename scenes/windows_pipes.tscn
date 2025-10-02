@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cp7ylvbnc5wos"]
+[gd_scene load_steps=9 format=3 uid="uid://cp7ylvbnc5wos"]
 
-[ext_resource type="Script" uid="uid://b2wap1ml5ibcp" path="res://scenes/mac_pipes.gd" id="1_2sobl"]
+[ext_resource type="Script" uid="uid://b2wap1ml5ibcp" path="res://scenes/windows_pipes.gd" id="1_2sobl"]
 [ext_resource type="Texture2D" uid="uid://cujpfkabaqy07" path="res://assets/sprites/pipe.png" id="1_nfto8"]
+[ext_resource type="Texture2D" uid="uid://me31rd5h6fua" path="res://assets/sprites/coin.png" id="3_5lr3a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nfto8"]
 size = Vector2(78, 36)
@@ -15,36 +16,52 @@ size = Vector2(72, 524.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p6bnq"]
 size = Vector2(78, 36)
 
-[node name="mac" type="Area2D"]
-position = Vector2(5, -301)
+[sub_resource type="CircleShape2D" id="CircleShape2D_5lr3a"]
+radius = 6.27401
+
+[node name="windows_pipes" type="Area2D"]
+position = Vector2(-3, -76)
 script = ExtResource("1_2sobl")
 
 [node name="lower" type="Sprite2D" parent="."]
-position = Vector2(-42, -73)
+position = Vector2(-49, -284)
 texture = ExtResource("1_nfto8")
 centered = false
-offset = Vector2(0, 380)
+offset = Vector2(0, 452)
 
 [node name="upper" type="Sprite2D" parent="."]
-position = Vector2(2, 130)
+position = Vector2(-6, 95)
 texture = ExtResource("1_nfto8")
-offset = Vector2(0, -380)
+offset = Vector2(0, -452)
 flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-3, 325)
+position = Vector2(-10, 186)
 shape = SubResource("RectangleShape2D_nfto8")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(-3, 605)
+position = Vector2(-10, 466)
 shape = SubResource("RectangleShape2D_2sobl")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
-position = Vector2(1, -269)
+position = Vector2(-6, -375)
 shape = SubResource("RectangleShape2D_2djj7")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
-position = Vector2(1, 11.25)
+position = Vector2(-6, -95)
 shape = SubResource("RectangleShape2D_p6bnq")
 
+[node name="money_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="money_area"]
+position = Vector2(-8.95999, 42.04)
+shape = SubResource("CircleShape2D_5lr3a")
+
+[node name="Sprite2D" type="Sprite2D" parent="money_area"]
+position = Vector2(-8.96, 42.04)
+scale = Vector2(0.09, 0.09)
+texture = ExtResource("3_5lr3a")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="money_area" to="." method="_on_money_area_body_entered"]

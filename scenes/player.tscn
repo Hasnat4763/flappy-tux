@@ -1,7 +1,31 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhhbq5qegh5jo"]
+[gd_scene load_steps=14 format=3 uid="uid://bhhbq5qegh5jo"]
 
 [ext_resource type="Texture2D" uid="uid://chbcge4cfcvgr" path="res://assets/sprites/tux.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://drc8cha452ns6" path="res://scenes/player.gd" id="1_g2els"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(0, 625, 55, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(55, 625, 55, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(110, 625, 55, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(0, 1, 55, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(55, 1, 55, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4r1p"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(110, 1, 55, 78)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -19,6 +43,34 @@ region = Rect2(110, 146, 55, 73)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_qlg0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tuyoq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjrip")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smehm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ur7pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4r1p")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_g2els")
 }, {
 "duration": 1.0,
@@ -33,18 +85,19 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
-radius = 26.0
-height = 64.0
+radius = 33.0
+height = 94.0
 
 [node name="Tux" type="CharacterBody2D"]
 script = ExtResource("1_g2els")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Animation_Fly" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -23.5)
 scale = Vector2(1, 1.01282)
 sprite_frames = SubResource("SpriteFrames_ws0vm")
-animation = &"jump"
-autoplay = "jump"
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.876164
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-4, -19)
