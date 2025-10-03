@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlyr14x0qfne8"]
+
+[ext_resource type="Script" uid="uid://bxs4tj5i74o2o" path="res://scenes/restart_screen.gd" id="1_7n4ce"]
+
+[node name="restart_layer" type="CanvasLayer"]
+script = ExtResource("1_7n4ce")
+
+[node name="restart" type="Button" parent="."]
+offset_left = 311.0
+offset_top = 432.0
+offset_right = 508.0
+offset_bottom = 513.0
+text = "Restart
+"
+
+[node name="Label" type="Label" parent="."]
+offset_top = 281.0
+offset_right = 865.0
+offset_bottom = 418.0
+theme_override_font_sizes/font_size = 71
+text = "Your Score Was : "
+horizontal_alignment = 1
+autowrap_mode = 1
+
+[connection signal="pressed" from="restart" to="." method="_on_restart_pressed"]

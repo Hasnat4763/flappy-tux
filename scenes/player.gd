@@ -8,14 +8,14 @@ var falling: bool = false
 var dead: bool = false
 const start_pos = Vector2(100, 400)
 
-func _ready():
-	reset()
-
 func reset():
 	falling = false
 	flying = false
+	dead = false
 	position = start_pos
 	set_rotation(0)
+	$Animation_Fly.play("idle")
+	
 	
 	
 func _physics_process(delta):
@@ -28,13 +28,11 @@ func _physics_process(delta):
 		if flying:
 			set_rotation(deg_to_rad(velocity.y * 0.05))
 			$Animation_Fly.play("jump")
-			
 		elif falling:
-			set_rotation(PI/PI)
 			$Animation_Fly.play("death")
 			
 	else:
-		if dead == true:
+		if dead:
 			$Animation_Fly.play("death")
 		else:
 			$Animation_Fly.play("idle")

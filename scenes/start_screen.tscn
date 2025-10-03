@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bo2y1erepa2dc"]
+
+[node name="start_screen" type="CanvasLayer"]
+
+[node name="Label" type="Label" parent="."]
+offset_right = 863.0
+offset_bottom = 314.0
+theme_override_font_sizes/font_size = 151
+text = "Flappy Tux"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 211.0
+offset_top = 334.0
+offset_right = 862.0
+offset_bottom = 428.0
+theme_override_font_sizes/font_size = 41
+text = "Start Game by Clicking on Screen"
+horizontal_alignment = 1
+vertical_alignment = 1

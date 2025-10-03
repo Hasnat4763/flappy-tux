@@ -24,6 +24,10 @@ window/size/viewport_height=936
 
 enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
 
+[global_group]
+
+pipes=""
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

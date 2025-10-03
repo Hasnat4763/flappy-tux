@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m00g1"]
 size = Vector2(1728, 170)
 
-[node name="windows_ground" type="Area2D"]
+[node name="mac_ground" type="Area2D"]
 script = ExtResource("1_m00g1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

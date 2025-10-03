@@ -19,7 +19,7 @@ size = Vector2(78, 36)
 [sub_resource type="CircleShape2D" id="CircleShape2D_5lr3a"]
 radius = 6.27401
 
-[node name="windows_pipes" type="Area2D"]
+[node name="windows_pipes" type="Area2D" groups=["pipes"]]
 position = Vector2(-3, -76)
 script = ExtResource("1_2sobl")
 

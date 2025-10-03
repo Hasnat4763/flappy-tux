@@ -1,10 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4w8xnl70jnto"]
+[gd_scene load_steps=9 format=3 uid="uid://b4w8xnl70jnto"]
 
 [ext_resource type="Script" uid="uid://brv7iqs2oppf" path="res://scenes/main_game.gd" id="1_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://bhhbq5qegh5jo" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://cp7ylvbnc5wos" path="res://scenes/windows_pipes.tscn" id="2_iywne"]
 [ext_resource type="Texture2D" uid="uid://c7pauged3jr0m" path="res://assets/sprites/bg.png" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://b7x43y2m85gsj" path="res://scenes/mac_ground.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://dlyr14x0qfne8" path="res://scenes/restart_screen.tscn" id="6_p57ef"]
+[ext_resource type="PackedScene" uid="uid://bo2y1erepa2dc" path="res://scenes/start_screen.tscn" id="7_u5sy4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5sy4"]
+size = Vector2(864.5, 24)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_lnu2h")
@@ -20,7 +25,7 @@ offset = Vector2(432, 364)
 z_index = 2
 position = Vector2(113, 403)
 
-[node name="windows_ground" parent="." instance=ExtResource("4_lbhrr")]
+[node name="mac_ground" parent="." instance=ExtResource("4_lbhrr")]
 z_index = 1
 position = Vector2(-1, -85)
 
@@ -28,14 +33,26 @@ position = Vector2(-1, -85)
 
 [node name="score" type="Label" parent="."]
 z_index = 1
-offset_left = 312.0
+offset_left = 271.0
 offset_top = 3.0
-offset_right = 552.0
+offset_right = 632.0
 offset_bottom = 58.0
 size_flags_horizontal = 4
 size_flags_vertical = 6
 theme_override_font_sizes/font_size = 40
 text = "Coins Collected = 0"
 
-[connection signal="hit" from="windows_ground" to="." method="_on_windows_ground_hit"]
+[node name="restart_layer" parent="." instance=ExtResource("6_p57ef")]
+
+[node name="start_screen" parent="." instance=ExtResource("7_u5sy4")]
+
+[node name="top_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="top_area"]
+position = Vector2(432, -26)
+shape = SubResource("RectangleShape2D_u5sy4")
+
+[connection signal="hit" from="mac_ground" to="." method="_on_windows_ground_hit"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="restart" from="restart_layer" to="." method="_on_restart_layer_restart"]
+[connection signal="body_entered" from="top_area" to="." method="_on_top_area_body_entered"]

@@ -13,10 +13,9 @@ const Pipe_Delay : int = 90
 const pipe_range : int = 100
 var screen_size: Vector2i
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+func _ready():
 	screen_size = get_window().size
-	ground_height = $windows_ground.get_node("Sprite2D").texture.get_height()
+	ground_height = $mac_ground.get_node("Sprite2D").texture.get_height()
 	pipes.clear()
 	new_game()
 	
@@ -24,9 +23,16 @@ func _ready() -> void:
 func new_game():
 	game_running = false
 	game_over = false
+	get_tree().call_group("pipes", "queue_free")
+	pipes = []
 	score = 0
+	$score.hide()
 	scroll = 0
 	$Tux.reset()
+	$start_screen.show()
+	$restart_layer.hide()
+	$score.text = "Coins Collected: " + str(score)
+	$restart_layer/Label.text  = "Your Score Was : " + str(score)
 
 func _input(event):
 	if not game_over:
@@ -37,10 +43,11 @@ func _input(event):
 				else:
 					if $Tux.flying:
 						$Tux.flap()
-						check_top()
 
 func start_game():
 	game_running = true
+	$start_screen.hide()
+	$score.show()
 	$Tux.flying = true
 	$Tux.flap()
 	$Timer.start()
@@ -51,7 +58,7 @@ func _process(_delta):
 		scroll += scroll_speed
 		if scroll >= screen_size.x:
 			scroll = 0
-		$windows_ground.position.x = -scroll
+		$mac_ground.position.x = -scroll
 		for pipe in pipes:
 			pipe.position.x -= scroll_speed
 
@@ -70,20 +77,13 @@ func pipe_generator():
 	add_child(pipe)
 	pipes.append(pipe)
 	
-	
-	
-func check_top():
-	if $Tux.position.y == 0:
-		$Tux.falling = true
-		stop_game()
-		
 func stop_game():
 	$Timer.stop()
 	$Tux.flying = false
 	$Tux.dead = true
 	game_running = false
 	game_over = true
-	
+	$restart_layer.show()
 	
 func tux_got_hit():
 	$Tux.falling = true
@@ -93,8 +93,19 @@ func tux_scored():
 	if game_running:
 		score += 1
 		$score.text = "Coins Collected: " + str(score)
+		$restart_layer/Label.text  = "Your Score Was : " + str(score)
 
 
 func _on_windows_ground_hit():
 	$Tux.falling = false
+	stop_game()
+
+func _on_restart_layer_restart():
+	new_game()
+
+
+func _on_top_area_body_entered(body: Node2D) -> void:
+	if game_running != true:
+		return
+	$Tux.falling = true
 	stop_game()
