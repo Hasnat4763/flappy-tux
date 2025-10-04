@@ -1,21 +1,28 @@
-[gd_scene format=3 uid="uid://bo2y1erepa2dc"]
+[gd_scene load_steps=2 format=3 uid="uid://bo2y1erepa2dc"]
+
+[ext_resource type="Texture2D" uid="uid://dvvxxpn6u80ft" path="res://assets/sprites/ground.png" id="1_tx5wa"]
 
 [node name="start_screen" type="CanvasLayer"]
 
 [node name="Label" type="Label" parent="."]
 offset_right = 863.0
-offset_bottom = 314.0
+offset_bottom = 262.0
 theme_override_font_sizes/font_size = 151
 text = "Flappy Tux"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="."]
-offset_left = 211.0
-offset_top = 334.0
-offset_right = 862.0
-offset_bottom = 428.0
+offset_left = 169.0
+offset_top = 326.0
+offset_right = 863.0
+offset_bottom = 499.0
 theme_override_font_sizes/font_size = 41
 text = "Start Game by Clicking on Screen"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(85, 416)
+scale = Vector2(0.0954861, 0.160714)
+texture = ExtResource("1_tx5wa")
