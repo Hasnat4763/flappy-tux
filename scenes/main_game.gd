@@ -36,6 +36,7 @@ func new_game():
 	$score.hide()
 	scroll = 0
 	$Tux.reset()
+	$start_screen/high_score_till_now.text = "Your Top  Score : " + str(high_score) 
 	$start_screen.show()
 	$restart_layer.hide()
 	$score.text = "Coins Collected: " + str(score)
@@ -47,13 +48,14 @@ func new_game():
 
 func _input(event):
 	if not game_over:
-		if event is InputEventMouseButton:
-			if event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+		if event is InputEvent:
+			if event.is_action_pressed("flappy_tux_controller"):
 				control_character()
-		elif event is InputEventKey:
-			if event.is_pressed() and not event.is_echo(): 
-				if event.keycode == KEY_SPACE:
-					control_character()
+				$jump_sound.play()
+			elif event is InputEventScreenTouch and event.pressed:
+				control_character()
+				$jump_sound.play()
+
 
 func control_character():
 	if not game_running:
@@ -105,6 +107,7 @@ func pipe_generator():
 	pipes.append(pipe)
 	
 func stop_game():
+
 	$Timer.stop()
 	$Tux.flying = false
 	$Tux.dead = true
@@ -112,30 +115,27 @@ func stop_game():
 	game_running = false
 	game_over = true
 	$restart_layer/Label.text  = "Your Score Was : " + str(score)
-	if score / 10 == 1:
+	if score < 10:
+		sigma_identifier = "not worthy"
+	elif score / 10 == 1:
 		sigma_identifier = "Trying"
 	elif score / 10 == 2:
 		sigma_identifier = "Near Alpha"
 	elif score / 10 == 3:
 		sigma_identifier = "Very Close to being Alpha"
-	elif score / 10 == 4:
-		sigma_identifier = "W Alpha"
+	elif score / 10 == 4 :
+		sigma_identifier = "Alpha Coder"
 	elif score / 10 == 5:
-		sigma_identifier = "more than an Alpha"
+		sigma_identifier = "Pro Kali Linux user"
 	elif score / 10 == 6:
-		sigma_identifier = "Close to 67"
+		sigma_identifier = "Pro Arch Linux user"
+	elif score / 10 >= 7:
+		sigma_identifier = "VERY SIGMA"
 	elif score == 67:
 		sigma_identifier = "67 \n Those who nose"
 	elif score == 69:
 		sigma_identifier = "Sussy Baka"
-	elif score / 10 == 7 :
-		sigma_identifier = "On the way to be a Sigma"
-	elif score / 10 == 8:
-		sigma_identifier = "Pro Kali Linux user"
-	elif score / 10 == 9:
-		sigma_identifier = "Pro Arch Linux user"
-	elif score / 10 >= 10:
-		sigma_identifier = "VERY SIGMA"
+
 	
 	$restart_layer/sigma_identifier.text = "You are currently " + sigma_identifier
 	if score > high_score:
@@ -149,11 +149,13 @@ func stop_game():
 	
 func tux_got_hit():
 	$Tux.falling = true
+	$death_sound.play()
 	stop_game()
 	
 func tux_scored():
 	if game_running:
 		score += 1
+		$coin_sound.play()
 		$score.text = "Coins Collected: " + str(score)
 		if score % 10 == 0 and current_scroll_speed < max_scroll_speed:
 			current_scroll_speed += 0.5
@@ -172,6 +174,7 @@ func _on_top_area_body_entered(_body: Node2D):
 	if game_running != true:
 		return
 	$Tux.falling = true
+	$death_sound.play()
 	stop_game()
 
 func save_high_score():

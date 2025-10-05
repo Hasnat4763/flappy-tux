@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4w8xnl70jnto"]
+[gd_scene load_steps=12 format=3 uid="uid://b4w8xnl70jnto"]
 
 [ext_resource type="Script" uid="uid://brv7iqs2oppf" path="res://scenes/main_game.gd" id="1_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://bhhbq5qegh5jo" path="res://scenes/player.tscn" id="1_uwrxv"]
@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://b7x43y2m85gsj" path="res://scenes/mac_ground.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://dlyr14x0qfne8" path="res://scenes/restart_screen.tscn" id="6_p57ef"]
 [ext_resource type="PackedScene" uid="uid://bo2y1erepa2dc" path="res://scenes/start_screen.tscn" id="7_u5sy4"]
+[ext_resource type="AudioStream" uid="uid://bct020igjyqa6" path="res://assets/sounds/jump.ogg" id="8_vtaks"]
+[ext_resource type="AudioStream" uid="uid://ubumuwv1f7cy" path="res://assets/sounds/dead.ogg" id="9_kvpfn"]
+[ext_resource type="AudioStream" uid="uid://doje3rdgf78ld" path="res://assets/sounds/coin_collect.ogg" id="10_dinhu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u5sy4"]
 size = Vector2(864.5, 24)
@@ -33,12 +36,15 @@ position = Vector2(-1, -85)
 
 [node name="score" type="Label" parent="."]
 z_index = 1
-offset_left = 271.0
+offset_left = 244.0
 offset_top = 3.0
-offset_right = 632.0
+offset_right = 605.0
 offset_bottom = 58.0
 size_flags_horizontal = 4
 size_flags_vertical = 6
+theme_override_colors/font_color = Color(1, 0.67451, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
 text = "Coins Collected = 0"
 
@@ -51,6 +57,15 @@ text = "Coins Collected = 0"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="top_area"]
 position = Vector2(432, -60)
 shape = SubResource("RectangleShape2D_u5sy4")
+
+[node name="jump_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_vtaks")
+
+[node name="death_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_kvpfn")
+
+[node name="coin_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_dinhu")
 
 [connection signal="hit" from="mac_ground" to="." method="_on_windows_ground_hit"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

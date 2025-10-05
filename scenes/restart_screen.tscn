@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dlyr14x0qfne8"]
+[gd_scene load_steps=3 format=3 uid="uid://dlyr14x0qfne8"]
 
 [ext_resource type="Script" uid="uid://bxs4tj5i74o2o" path="res://scenes/restart_screen.gd" id="1_7n4ce"]
+[ext_resource type="Texture2D" uid="uid://cwkcjv4rg6baw" path="res://assets/sprites/heavysob.png" id="2_a0ykt"]
 
 [node name="restart_layer" type="CanvasLayer"]
 script = ExtResource("1_7n4ce")
@@ -10,44 +11,66 @@ offset_left = 339.0
 offset_top = 425.0
 offset_right = 536.0
 offset_bottom = 506.0
+theme_override_colors/font_hover_color = Color(5.0056e-06, 0.681389, 0.856864, 1)
+theme_override_colors/icon_disabled_color = Color(1, 0.821337, 0.976048, 1)
+theme_override_colors/icon_pressed_color = Color(1, 0.566096, 0.862455, 1)
+action_mode = 0
 text = "Restart
 "
+icon_alignment = 1
+expand_icon = true
+text_direction = 1
 
 [node name="Label" type="Label" parent="."]
-offset_left = 1.0
-offset_top = 40.0
-offset_right = 866.0
-offset_bottom = 177.0
+offset_top = 120.0
+offset_right = 865.0
+offset_bottom = 217.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 71
 text = "Your Score Was : "
 horizontal_alignment = 1
 autowrap_mode = 1
 
 [node name="high_score" type="Label" parent="."]
-offset_left = 1.0
-offset_top = 204.0
-offset_right = 865.0
-offset_bottom = 309.0
+offset_left = -1.0
+offset_top = 295.0
+offset_right = 863.0
+offset_bottom = 400.0
+theme_override_colors/font_color = Color(0.0821767, 0.636578, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.736645, 0.478695, 5.77569e-07, 1)
+theme_override_font_sizes/font_size = 46
 text = "Highest Score : "
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="."]
-offset_left = 151.0
-offset_top = -4.0
-offset_right = 710.0
-offset_bottom = 73.0
+offset_left = 123.0
+offset_top = 25.0
+offset_right = 682.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(0.870387, 2.88785e-07, 1.2514e-06, 1)
 theme_override_font_sizes/font_size = 36
-text = "You Died! :heavysob:"
+text = "You Died! "
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="sigma_identifier" type="Label" parent="."]
 offset_left = -1.0
-offset_top = 169.0
+offset_top = 213.0
 offset_right = 864.0
-offset_bottom = 225.0
+offset_bottom = 295.0
+theme_override_colors/font_color = Color(0.77311, 0.53223, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Good"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(568, 61)
+texture = ExtResource("2_a0ykt")
 
 [connection signal="pressed" from="restart" to="." method="_on_restart_pressed"]
